@@ -1,0 +1,90 @@
+ CI/CD Pipeline
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:11
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_mysql, mysqli
+          
+      - name: Install Composer
+        run: composer install --no-progress --no-interaction
+        
+      - name: Run Tests
+        run: |
+          cp .env.example .env
+          php spark migrate
+          php spark test
+          
+      - name: Security Scan
+        uses: phpstan/phpstan-github-actions@master
+        with:
+          level: 8
+          install_extensions: true
+
+  deploy-staging:
+    needs: test
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to Staging
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.STAGING_HOST }}
+          username: ${{ secrets.STAGING_USER }}
+          key: ${{ secrets.STAGING_SSH_KEY }}
+          script: |
+            cd /var/www/taskmanager-staging
+            git pull origin develop
+            composer install --no-dev --optimize-autoloader
+            php spark migrate
+            php spark optimize
+            sudo supervisorctl restart taskmanager:
+
+  deploy-prod:
+    needs: test
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy to Production
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.PROD_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          script: |
+            cd /var/www/taskmanager
+            git pull origin main
+            composer install --no-dev --optimize-autoloader
+            php spark migrate --all
+            php spark db:seed ProductionSeeder
+            php spark optimize
+            sudo supervisorctl restart taskmanager:
+

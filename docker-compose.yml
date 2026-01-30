@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/app
+    environment:
+      - DB_HOST=mariadb
+      - APP_BASEURL=http://localhost:8080
+    depends_on:
+      - mariadb
+    networks:
+      - taskmanager
+
+  mariadb:
+    image: mariadb:11.4
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: taskmanager
+      MYSQL_USER: taskmanager
+      MYSQL_PASSWORD: taskpass
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
+    ports:
+      - "3306:3306"
+    networks:
+      - taskmanager
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - taskmanager
+
+volumes:
+  mariadb_data:
+
+networks:
+  taskmanager:
+    driver: bridge
+

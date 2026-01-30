@@ -1,0 +1,5 @@
+zone "taskmanager.local" {
+    type master;
+    file "/etc/bind/db.taskmanager.local";
+};
+

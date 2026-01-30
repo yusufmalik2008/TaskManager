@@ -1,0 +1,47 @@
+name: 🚀 TaskManager CI/CD - LOCAL ONLY
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-24.04
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: taskmanager_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mariadb-admin ping -uroot -proot"
+          --health-interval=10s
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: 🐘 PHP 8.3 + Extensions
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_mysql, mysqli
+          
+      - name: 📦 Composer Install
+        run: composer install --no-progress --optimize-autoloader
+
+      - name: 🧪 Setup Database & Test
+        run: |
+          cp .env.example .env
+          echo "database.default.hostname=127.0.0.1" >> .env
+          echo "database.default.database=taskmanager_test" >> .env
+          echo "database.default.username=root" >> .env
+          echo "database.default.password=root" >> .env
+          echo "database.default.port=3306" >> .env
+          php spark migrate
+          php spark test
+
+      - name: 🏗️ Build Docker Image (Local Use)
+        run: |
+          docker build -t taskmanager-local:latest .

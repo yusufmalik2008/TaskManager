@@ -1,0 +1,110 @@
+# =========================
+# 🚀 TASKMANAGER ENTERPRISE
+# Ultimate Gitignore 2026
+# =========================
+
+# -------------------------
+# 🔒 ENVIRONMENT & SECRETS
+# -------------------------
+.env*
+!.env.example
+.vagrant
+Vagrantfile
+
+# -------------------------
+# 🗑️ OS/EDITOR JUNK (Windows/Mac/Linux)
+# -------------------------
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Linux/Unix
+*~
+.directory
+.Trash-*
+
+# Editors (VSCode, PHPStorm, Sublime)
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# -------------------------
+# ⚙️ CI4 RUNTIME (Writable)
+# -------------------------
+/writable/cache/*
+!/writable/cache/.gitkeep
+/writable/logs/*
+!/writable/logs/.gitkeep
+/writable/session/*
+!/writable/session/.gitkeep
+/writable/uploads/*
+!/writable/uploads/.gitkeep
+/writable/debugbar/*
+!/writable/debugbar/.gitkeep
+/writable/tests/*
+php_errors.log
+error_log
+
+# -------------------------
+# 📦 DEPENDENCIES
+# -------------------------
+/vendor/
+/node_modules/
+composer.lock  # ← KEEP THIS! Locks versions
+
+# -------------------------
+# 🧪 TESTING
+# -------------------------
+/tests/_output/
+/coverage/
+.phpunit.result.cache
+/phpunit.xml
+
+# -------------------------
+# 🏗️ BUILDS & ARTIFACTS
+# -------------------------
+/builds/
+/dist/
+/*.zip
+/*.tar.gz
+/*.tgz
+
+# -------------------------
+# 🐳 DOCKER LOCAL
+# -------------------------
+docker-compose.override.yml
+Dockerfile.local
+
+# -------------------------
+# 📊 MONITORING LOCAL
+# -------------------------
+grafana_data/
+prometheus_data/
+bind_data/
+dhcp_leases/
+
+# -------------------------
+# 🔐 CERTIFICATES (Local SSL)
+# -------------------------
+*.pem
+*.crt
+*.key
+nginx_ssl/
+
+# =========================
+# ✅ KEEP THESE FILES
+# =========================
+# .env.example
+# composer.lock
+# docker-compose.monitoring.yml
+# public/index.php

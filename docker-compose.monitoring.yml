@@ -1,0 +1,32 @@
+ DHCP SERVER
+  dhcp:
+    image: networkboot/dhcpd:latest
+    ports:
+      - "67:67/udp"
+      - "68:68/udp"
+    volumes:
+      - ./docker/dhcpd.conf:/data/dhcpd.conf:ro
+      - dhcp_leases:/data/var/lib/dhcp
+    cap_add:
+      - NET_BIND_SERVICE
+      - NET_RAW
+    networks:
+      dns:
+        ipv4_address: 172.30.0.11
+    privileged: true
+
+volumes:
+  mariadb_data:
+  nginx_ssl:
+
+networks:
+  taskmanager:
+    driver: bridge
+  monitoring:
+    driver: bridge
+  dns:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.30.0.0/16
+

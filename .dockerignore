@@ -1,0 +1,54 @@
+# 🚀 TASKMANAGER DOCKER OPTIMIZATION
+# Speed up builds by 80%!
+
+# 🔒 Secrets
+.env*
+!.env.example
+
+# 📦 Dependencies (rebuilt in Docker)
+vendor/
+node_modules/
+
+# 🗑️ Runtime
+writable/
+tests/
+.git/
+
+# 🧪 Test outputs
+coverage/
+tests/_output/
+
+# 🏗️ Builds
+builds/
+dist/
+
+# 📊 IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.sublime-*
+
+# 📈 Monitoring volumes (persistent)
+grafana_data/
+prometheus_data/
+bind_data/
+dhcp_leases/
+
+# 🐳 Docker configs (host-mounted)
+docker-compose.override.yml
+Dockerfile.*
+
+# 🔐 Local certs
+*.pem
+*.key
+*.crt
+
+# 📜 Docs (rebuild)
+README.md
+docs/
+
+# 🚫 NEVER DOCKERIZE
+.gitignore
+.dockerignore
+.DS_Store
+Thumbs.db
