@@ -1,12 +1,10 @@
-```markdown
-# 🚀 TaskManager Enterprise - XAMPP + CI4 + Full Monitoring Stack
+# 🚀 **TaskManager Enterprise** - XAMPP + CI4 + Full Monitoring Stack
 
-![TaskManager Dashboard](https://via.placeholder.com/1200x600/1e3a8a/ffffff?text=TaskManager+Enterprise)
 
-**Production-ready PHP task management** with **CodeIgniter 4**, **TailwindCSS**, **Docker monitoring** 
-(Grafana/Prometheus/BIND9), and **enterprise CI/CD pipelines**.
 
-## ✨ Features
+**Production-ready PHP task management** with **CodeIgniter 4**, **TailwindCSS**, **Docker monitoring** (Grafana/Prometheus/BIND9), and **enterprise CI/CD pipelines**.
+
+## ✨ **Features**
 
 | Feature | Status | Technology |
 |---------|--------|------------|
@@ -18,7 +16,7 @@
 | **CI/CD Pipelines** | ✅ Automated | GitHub Actions |
 | **Kubernetes Ready** | ✅ Manifests | k8s/ folder |
 
-## 🎯 🚨 CRITICAL: Run init.sql FIRST! 🚨
+## 🎯 **🚨 CRITICAL: Run init.sql FIRST! 🚨**
 
 ```sql
 -- ⚠️ BEFORE starting app, execute init.sql in phpMyAdmin:
@@ -26,7 +24,7 @@
 -- 2. Creates: taskmanager DB + tasks/projects tables + sample data
 ```
 
-## 🎮 Quick Start (XAMPP - 3 Minutes)
+## 🎮 **Quick Start** (XAMPP - 3 Minutes)
 
 ```bash
 # 1. Clone to XAMPP
@@ -50,7 +48,7 @@ composer install --no-dev
 
 **✅ Expected**: Login screen → Task dashboard with sample data!
 
-## 🐳 Docker Enterprise Stack (1 Command)
+## 🐳 **Docker Enterprise Stack** (1 Command)
 
 ```bash
 # Full Production Stack (App + Monitoring + DNS)
@@ -64,7 +62,7 @@ docker compose -f docker-compose.monitoring.yml up -d
 # BIND9 DNS:  localhost:53
 ```
 
-## 📊 Monitoring Dashboard (Live Metrics)
+## 📊 **Monitoring Dashboard** (Live Metrics)
 
 ```
 Grafana (localhost:3000):
@@ -76,7 +74,7 @@ Grafana (localhost:3000):
 └── 📈 Custom task_health view
 ```
 
-## 🛠 Tech Stack
+## 🛠 **Tech Stack**
 
 ```yaml
 Frontend:     TailwindCSS + jQuery + Bootstrap 5
@@ -89,7 +87,7 @@ Orchestration: Kubernetes (k8s/)
 Security:     SHA1/MD5 + CSRF + SQLi protection
 ```
 
-## 🔄 CI/CD Status
+## 🔄 **CI/CD Status**
 
 | Workflow | Trigger | Purpose |
 |----------|---------|---------|
@@ -97,7 +95,7 @@ Security:     SHA1/MD5 + CSRF + SQLi protection
 | `monitoring-stack.yml` | Every 6h | Infra health checks |
 | `deploy.yml` | Manual | Production deploy |
 
-## 🚀 Production Deploy (VPS/Server)
+## 🚀 **Production Deploy** (VPS/Server)
 
 ```bash
 # Ubuntu/Debian Server
@@ -111,7 +109,7 @@ docker compose -f docker-compose.monitoring.yml up -d
 ./deploy.sh  # Zero-downtime updates
 ```
 
-## 🗄 Database Schema (init.sql creates)
+## 🗄 **Database Schema** (init.sql creates)
 
 ```sql
 ✅ tasks: id, title, description(encrypted), status, priority, project_id
@@ -127,13 +125,13 @@ Projects: "Website Redesign", "API Development", "Database Migration"
 Tasks: "Design homepage", "Setup auth routes", "DB backup script"
 ```
 
-## 📱 Screenshots
+## 📱 **Screenshots**
 
 | Dashboard | Tasks | Grafana Monitoring |
 |-----------|-------|-------------------|
-| ![Dashboard](https://via.placeholder.com/400x200/0f766e/ffffff?text=TaskManager) | ![Tasks](https://via.placeholder.com/400x200/1e3a8a/ffffff?text=CRUD+Tasks) | ![Grafana](https://via.placeholder.com/400x200/7c3aed/ffffff?text=Live+Metrics) |
+|  |  |  |
 
-## 🔐 Security
+## 🔐 **Security**
 
 - ✅ **SHA1/MD5 Password Encryption**
 - ✅ **CSRF Protection** (CI4)
@@ -141,7 +139,7 @@ Tasks: "Design homepage", "Setup auth routes", "DB backup script"
 - ✅ **XSS Filtering** (CI4 Security)
 - ✅ **Docker Vulnerability Scanning** (GitHub Actions)
 
-## 🧪 Development Workflow
+## 🧪 **Development Workflow**
 
 ```bash
 # Install dev dependencies
@@ -161,7 +159,7 @@ docker compose up app mysql
 kubectl apply -f k8s/
 ```
 
-## 📈 Performance Metrics
+## 📈 **Performance Metrics**
 
 ```
 Response Time:    <50ms (OPcache + CI4)
@@ -171,7 +169,7 @@ GitHub CI:        90s (Full stack)
 Repo Size:        400KB (Ultra-light!)
 ```
 
-## 🤝 Contributing
+## 🤝 **Contributing**
 
 ```bash
 1. fork https://github.com/yusufmalik2008/TaskManager
@@ -182,11 +180,11 @@ Repo Size:        400KB (Ultra-light!)
 # GitHub Actions auto-tests! ✅
 ```
 
-## 📄 License
+## 📄 **License**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[
 
-## 👨‍💻 Author
+## 👨‍💻 **Author**
 
 **Joseph (yusufmalik2008)** - [GitHub Profile](https://github.com/yusufmalik2008)
 
@@ -196,7 +194,7 @@ Repo Size:        400KB (Ultra-light!)
 💻  Linux, Docker, CI4, Kubernetes, Monitoring
 ```
 
-## 🎉 One-Command Setup
+## 🎉 **One-Command Setup**
 
 ```bash
 # XAMPP (Local)
@@ -210,7 +208,7 @@ docker compose -f docker-compose.monitoring.yml up -d &&
 echo "✅ App:8080 | Grafana:3000 | Prometheus:9090"
 ```
 
----
+***
 
 <div align="center">
   <img src="https://via.placeholder.com/800x1/0f172a/ffffff?text=">
@@ -218,6 +216,3 @@ echo "✅ App:8080 | Grafana:3000 | Prometheus:9090"
   <br><br>
   ⭐ <em>Star if you like enterprise PHP! 🔥</em>
 </div>
-```
-
-**✅ Copy-paste this entire file as `README.md`** - Ready for GitHub! 🚀
